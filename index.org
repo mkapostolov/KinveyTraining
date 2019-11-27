@@ -1,11 +1,11 @@
 #+Title: Kinvey BaaS
 #+Author: Martin Apostolov
 
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_INIT_OPTIONS: width:1200, height:800, margin: 0.2, minScale:0.2, maxScale:3.5, hash:true, history:true, controlsTutorial:true
 #+REVEAL_THEME: night
 #+OPTIONS: toc:nil
 #+OPTIONS: num:nil 
-#+OPTIONS: reveal_single_file:t
 
 * Overview of Kinvey product
 ** What is Kinvey
