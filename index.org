@@ -1,0 +1,318 @@
+#+Title: Kinvey BaaS
+#+Author: Martin Apostolov
+
+#+REVEAL_INIT_OPTIONS: width:1200, height:800, margin: 0.2, minScale:0.2, maxScale:3.5, hash:true, history:true, controlsTutorial:true
+#+REVEAL_THEME: night
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil 
+#+OPTIONS: reveal_single_file:t
+
+* Overview of Kinvey product
+** What is Kinvey
+   Kinvey is a serverless development platform. It provides Backend As a Service which means that developers would not require to build and maintain a backend for their apps. 
+   
+   Key features:
+   - user management
+   - storing data in the cloud
+   - file storage
+   - integration with external data source
+** Kinvey Console
+   Kinvey Console is the web-based GUI that allows you to manage most aspects of your Kinvey backend.
+   
+   #+ATTR_HTML: :target _blank 
+   URL: [[https://jci-us1-console.kinvey.com]]
+** Kinvey DevCenter
+   Whenever you have questions, you can refer to Kinvey devcenter for detailed documentation of all features.
+   
+   #+ATTR_HTML: :target _blank 
+   URL: [[https://devcenter.kinvey.com/]]
+* Kinvey Features
+* Apps & Environments
+  | Apps         | A backend app contains all components (data, authentication, server-side logic, etc.). It can be used/connected to multiple frontent apps. |
+  | Environments | A backend app can have multiple environments to support the development lifecycle: Development, Staging, Production                        |
+  
+  Each environment has a uniqu ID calld KID (Kinvey ID) which starts with `kid_...`
+  [[./images/kid.png]]
+* REST API
+  Host: https://jsi-us1-baas.kinvey.com \\
+  All reqeuest require authentication \\
+ \\ 
+  *Basic* Authentication
+#+BEGIN_SRC text
+Auth string (before encoding in base64): Basic kid_xxx:masterSecret
+Auth string (before encoding in base64): Basic kid_xxx:appSecret
+
+Auth string (after base64 encoding): Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
+
+Authorization: Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
+#+END_SRC 
+\\
+  *Session* Authentication
+  #+BEGIN_SRC 
+  Authorization: Kinvey 0a8368d7-cbb8...
+  #+END_SRC
+  \\ 
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/authentication
+* Users
+Creating a user
+ #+BEGIN_SRC
+ POST /user/:appKey/
+ Host: baas.kinvey.com
+ Authorization: [Basic Auth with app credentials]
+ Content-Type: application/json
+
+ {
+  "username": "ivan",
+  "password": "123456",
+  "city": "Boston"
+ }
+ #+END_SRC
+ 
+ Logging a user
+#+BEGIN_SRC 
+POST /user/:appKey/login
+Host: baas.kinvey.com
+Content-Type: application/json
+Authorization: [Basic Auth with app credentials]
+
+{
+  "username": "ivan",
+  "password": "123456"
+}
+#+END_SRC
+
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/users
+** Creating a user in Node.js
+   #+BEGIN_SRC js
+     var request = require("request");
+
+     var options = {
+       method: "POST",
+       url: "https://baas.kinvey.com/user/kid_HJdVi4iZS",
+       headers: {Authorization: 'Basic a2lkX0hKZFZpN....'},
+       body: {username: "ivan", password: "123456", city: "Boston"},
+       json: true
+     };
+
+     request(options, function(error, response, body) {
+       if (error) throw new Error(error);
+
+       console.log(body);
+     });
+   #+END_SRC
+   
+** Logging a user in Node.js
+  #+BEGIN_SRC js
+    var request = require("request");
+
+    var options = {
+      method: "POST",
+      url: "https://baas.kinvey.com/user/kid_HJdVi4iZS/login",
+      headers: {Authorization: 'Basic a2lkX0hKZFZpNGlaU...'},
+      body: { username: "ivan", password: "123456" },
+      json: true
+    };
+
+    request(options, function(error, response, body) {
+      if (error) throw new Error(error);
+
+      console.log(body);
+    });
+  #+END_SRC 
+** Important notes
+    1) Passing empty body when creating a new user will result in the `username` and `password` being auto-generated.
+    2) By default the issued user session tokens do not expire. You can add expiration through *Console* \to *App settings* \to *User session timeout*
+* Collections
+  Creating a collection
+    1) Through Kinvey Console
+    2) Making a POST request to a non-existing collection would create the collection first before adding a file to it
+** CRUD opeartions
+  Kinvey supports CRUD operations (Create, Read, Update, Delete) by making a requests to the following url for collections: 
+  #+BEGIN_SRC 
+  URL: /appdata/:appKey/:collectionName
+  #+END_SRC
+  
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/datastore
+** Differences between relatinal and NoSQL databases
+   Kinvey uses MongoDB which is a NoSQL database. A NoSQL databse stores data as key-value pairs. 
+      
+   #+BEGIN_SRC json
+     {
+       "_id": ObjectId("5099803df3f4948bd2f98391"),
+       "name": { "first": "Alan", "last": "Turing" },
+       "city": "Boston",
+       "contribs": ["Turing machine", "Turing test", "Turingery"],
+       "views":125
+     }
+   #+END_SRC
+   
+   #+BEGIN_VERSE
+   Kinvey uses MongoDB which is a NoSQL database. A NoSQL databse stores data as key-value pairs. 
+   NoSQL database has no schema (like relational).
+   NoSQL does not require *Normalized Data*. There are even benefits when using *Denormalized data*.
+   #+END_VERSE
+   
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/data-modeling
+* Files
+ #+ATTR_HTML: :style text-align:left
+ *Uploading files*
+ Kinvey stores files in a third-party service - currently Google Cloud Storage. \\
+ Uploading to Kinvey is a two-step process:
+ 1) Upload file metadata to Kinvey
+ 2) Upload file data to Google Cloud storage
+\\ 
+\\
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/files
+** Upload metadata important notes
+1) File content type: Note that you would set an "X-Kinvey-Content-Type" header if you want to set the content type to Google Cloud Storage.
+2) Public/Private files:
+   - When uploading the file as *public: true*, in the first request's response you would receive not only the *_uploadURL* but also *_requiredHeaders* which should be included in the second request as headers.
+   - When uploading the file as *public:false*, the response would return an empty *_requiredHeaders* property, so NO additional headers should be included in the second request, otherwise it would result in an error response.
+** Upload file sample request
+   *Upload file metadata*
+   #+BEGIN_SRC
+   POST /blob/:appKey HTTP/1.1
+   Content-Type: application/json
+   X-Kinvey-Content-Type: image/png
+   Authorization: [user credentials]
+​
+  {
+     "_filename": "some-file-name",
+     "_public": true
+  }
+   #+END_SRC
+   
+   *Upload file data*
+   #+BEGIN_SRC 
+   PUT _uploadURL
+   Content-Type: image/png
+   _requiredHeaders // ONLY if received by previous call
+​
+   Body:
+   binary file here
+   #+END_SRC
+* Services
+  #+BEGIN_VERSE
+  Services are objects that can be shared between Environemnts in an App or between Apps in an Organization.
+  Services include:
+  #+END_VERSE
+  
+  - *Mobile Identity Connect* (MIC) - bridges mobile applications with existing enterprise identity and single sign-on solutions
+  - *Flex* - low-code, lightweight Node.js microservices for adding server-side code
+  - *RAPID* - connect to existing enterprise external data (like relational Database or external REST API)
+* Serverside Code
+  Serverside code is mainly used to create logic that is executed as a *collection hook* (before or after a request to a collection is made) or to a *custom endpiont* - a logic that has its own endpiont to be called and be executed.
+[[./images/kinvey_request.png]] 
+ 
+  - Business Logic - writing server side logic (collection hooks and custom endpints) right inside Kinvey Console. It is preferable to use Flex instead of Business Logic.
+  - Flex - create a Node.js microservice that you can deploy to Kinvey.
+  - Scheduled code - execute custom endpionts on predefined intervals
+* Flex
+  Kinvey Flex is a more feature-rich and flexible way to write server-side code for your apps compared to Business Logic. \\
+  Flex has three flavors: data integration services, authentication services, and general-purpose functions.
+  
+  \\
+  Prerequisites:  
+  1) install NPM (Node Package Manager)
+  2) install Kinvey CLI - https://github.com/Kinvey/kinvey-cli
+     
+  \\
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime
+** Create Flex Service in Kinvey Console
+   Before you can deploy your Node.js project, you need to provision a Flex service using the Kinvey Console.
+   \\
+   \\
+   Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service
+** Initialize a Node.js project
+  #+BEGIN_SRC shell
+    mkdir 'myProject'
+    cd 'myProject'
+    npm init
+    npm install kinvey-flex-sdk
+    touch index.js
+  #+END_SRC 
+** Initialize the Flex SDK inside index.js
+  #+REVEAL_HTML: <div style="font-size: 90%;">
+  #+BEGIN_SRC js
+    const sdk = require("kinvey-flex-sdk");
+
+    sdk.service({}, function(err, flex) {
+      if (err) {
+        console.log(err);
+      }
+
+      console.log(`===> Flex Service started (SDK v${flex.version})`);
+
+      // Define a function to execute
+      function logTime(context, complete, modules) {
+        console.log(new Date());
+        complete()
+          .ok()
+          .done();
+      }
+      // Register the logTime function as a Flex function
+      flex.functions.register("logTime", logTime);
+    });
+  #+END_SRC
+** Configure Kinvey CLI for deploy
+   Configure Kinvey CLI so that it can access Kinvey Console with your credentials
+   #+BEGIN_SRC shell
+    $ kinvey init
+    ? E-mail john.doe@kinvey.com
+    ? Password ***********
+    ? Instance ID (optional) jci-us1
+    ? Profile name dev
+   #+END_SRC 
+  
+   #+BEGIN_SRC shell
+     cd <node.js project dir>
+     kinvey flex init
+   #+END_SRC
+** Deploy to Kinvey
+#+BEGIN_SRC shell
+  cd <node.js project dir>
+  kinvey flex deploy
+
+  # check the status of the service/deploy
+  kinvey flex status
+
+  # check service logs
+  kinvey flex logs
+#+END_SRC
+
+#+ATTR_HTML: :target _blank 
+Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices
+** Check service functions
+   #+ATTR_HTML: :style text-align:left
+   Go to 
+   #+BEGIN_SRC 
+   Kinvey Console -> Services -> your-flex-service -> Service Objects
+   #+END_SRC
+   #+ATTR_HTML: :style text-align:left
+   You should be able to see the registered Flex functions (logTime in our case)
+  
+   \\
+   #+ATTR_HTML: :style text-align:left
+   Go to 
+   #+BEGIN_SRC 
+   Kinvey Console -> your-app -> Custom Endpoint 
+   #+END_SRC 
+   #+ATTR_HTML: :style text-align:left
+   Create a new endpoint and choose *Microservice* and then your Flex service and flex function.
+    
+   \\ 
+   #+ATTR_HTML: :style text-align:left
+   Make a request to:
+#+BEGIN_SRC 
+POST /rpc/:kid/custom/your-custom-endpoint
+#+END_SRC
+* Security
+  - Collection permissions
+  - Entity permissions
+* Mobile Identity Connect
