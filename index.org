@@ -58,7 +58,7 @@ Authorization: Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
 Creating a user
  #+BEGIN_SRC
  POST /user/:appKey/
- Host: baas.kinvey.com
+ Host: jci-us1-baas.kinvey.com
  Authorization: [Basic Auth with app credentials]
  Content-Type: application/json
 
@@ -72,7 +72,7 @@ Creating a user
  Logging a user
 #+BEGIN_SRC 
 POST /user/:appKey/login
-Host: baas.kinvey.com
+Host: jci-us1-baas.kinvey.com
 Content-Type: application/json
 Authorization: [Basic Auth with app credentials]
 
@@ -90,7 +90,7 @@ Authorization: [Basic Auth with app credentials]
 
      var options = {
        method: "POST",
-       url: "https://baas.kinvey.com/user/kid_HJdVi4iZS",
+       url: "https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS",
        headers: {Authorization: 'Basic a2lkX0hKZFZpN....'},
        body: {username: "ivan", password: "123456", city: "Boston"},
        json: true
@@ -109,7 +109,7 @@ Authorization: [Basic Auth with app credentials]
 
     var options = {
       method: "POST",
-      url: "https://baas.kinvey.com/user/kid_HJdVi4iZS/login",
+      url: "https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS/login",
       headers: {Authorization: 'Basic a2lkX0hKZFZpNGlaU...'},
       body: { username: "ivan", password: "123456" },
       json: true
@@ -125,6 +125,7 @@ Authorization: [Basic Auth with app credentials]
     1) Passing empty body when creating a new user will result in the `username` and `password` being auto-generated.
     2) By default the issued user session tokens do not expire. You can add expiration through *Console* \to *App settings* \to *User session timeout*
 * Collections
+  #+ATTR_HTML: :style text-align:left
   Creating a collection
     1) Through Kinvey Console
     2) Making a POST request to a non-existing collection would create the collection first before adding a file to it
@@ -134,6 +135,7 @@ Authorization: [Basic Auth with app credentials]
   URL: /appdata/:appKey/:collectionName
   #+END_SRC
   
+  \\ 
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/datastore
 ** Differences between relatinal and NoSQL databases
@@ -238,7 +240,7 @@ Authorization: [Basic Auth with app credentials]
     touch index.js
   #+END_SRC 
 ** Initialize the Flex SDK inside index.js
-  #+REVEAL_HTML: <div style="font-size: 90%;">
+  #+REVEAL_HTML: <div style="font-size: 80%;">
   #+BEGIN_SRC js
     const sdk = require("kinvey-flex-sdk");
 
