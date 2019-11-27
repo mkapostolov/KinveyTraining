@@ -30,8 +30,8 @@
 * Apps & Environments
   | Apps         | A backend app contains all components (data, authentication, server-side logic, etc.). It can be used/connected to multiple frontent apps. |
   | Environments | A backend app can have multiple environments to support the development lifecycle: Development, Staging, Production                        |
-  
-  Each environment has a uniqu ID calld KID (Kinvey ID) which starts with `kid_...`
+  \\ 
+  Each environment has a unique ID called KID (Kinvey ID)
   [[./images/kid.png]]
 * REST API
   Host: https://jsi-us1-baas.kinvey.com \\
@@ -129,7 +129,7 @@ Authorization: [Basic Auth with app credentials]
   Creating a collection
     1) Through Kinvey Console
     2) Making a POST request to a non-existing collection would create the collection first before adding a file to it
-** CRUD opeartions
+** CRUD operations
   Kinvey supports CRUD operations (Create, Read, Update, Delete) by making a requests to the following url for collections: 
   #+BEGIN_SRC 
   URL: /appdata/:appKey/:collectionName
@@ -138,8 +138,11 @@ Authorization: [Basic Auth with app credentials]
   \\ 
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/datastore
-** Differences between relatinal and NoSQL databases
-   Kinvey uses MongoDB which is a NoSQL database. A NoSQL databse stores data as key-value pairs. 
+** Relatinal vs. NoSQL database
+   #+BEGIN_VERSE
+   Kinvey uses MongoDB which is a NoSQL database.
+   A NoSQL databse stores data as key-value pairs. 
+   #+END_VERSE
       
    #+BEGIN_SRC json
      {
@@ -152,30 +155,29 @@ Authorization: [Basic Auth with app credentials]
    #+END_SRC
    
    #+BEGIN_VERSE
-   Kinvey uses MongoDB which is a NoSQL database. A NoSQL databse stores data as key-value pairs. 
    NoSQL database has no schema (like relational).
-   NoSQL does not require *Normalized Data*. There are even benefits when using *Denormalized data*.
+   NoSQL does not require *Normalized Data*.
+   *Denormalized data* is even preferred.
    #+END_VERSE
-   
+  \\ 
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/data-modeling
 * Files
- #+ATTR_HTML: :style text-align:left
- *Uploading files*
- Kinvey stores files in a third-party service - currently Google Cloud Storage. \\
- Uploading to Kinvey is a two-step process:
+ *Uploading*\\
+ Kinvey stores files in a third-party service - currently Google Cloud Storage \\
+ \\
+ Uploading is a two-step process:
  1) Upload file metadata to Kinvey
- 2) Upload file data to Google Cloud storage
+ 2) Upload file data to GCS
 \\ 
 \\
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/files
-** Upload metadata important notes
-1) File content type: Note that you would set an "X-Kinvey-Content-Type" header if you want to set the content type to Google Cloud Storage.
-2) Public/Private files:
-   - When uploading the file as *public: true*, in the first request's response you would receive not only the *_uploadURL* but also *_requiredHeaders* which should be included in the second request as headers.
-   - When uploading the file as *public:false*, the response would return an empty *_requiredHeaders* property, so NO additional headers should be included in the second request, otherwise it would result in an error response.
-** Upload file sample request
+** Important notes when uploading
+1) File content type - set "X-Kinvey-Content-Type" header if you want to set the content type to GCS
+2) Public files - when *public: true*, in the request's response you will receive *_requiredHeaders* - include them in the second request
+3) Private files - when *public: false*, _requiredHeaders is empty
+** Sample request
    *Upload file metadata*
    #+BEGIN_SRC
    POST /blob/:appKey HTTP/1.1
@@ -198,22 +200,32 @@ Authorization: [Basic Auth with app credentials]
    Body:
    binary file here
    #+END_SRC
+** Dowloading files
+  #+ATTR_HTML: :style text-align:left
+  Downloading from Kinvey is again a two-step process.  
+  1) A GET request to Kinvey in order to retrieve the Google Cloud Storage URL associated with your file
+     #+BEGIN_SRC 
+    GET /blob/:appKey/:fileId HTTP/1.1
+    Host: baas.kinvey.com
+    Authorization: [user credentials] 
+     #+END_SRC
+  2) A request to the received *_downloadURL*
 * Services
-  #+BEGIN_VERSE
-  Services are objects that can be shared between Environemnts in an App or between Apps in an Organization.
-  Services include:
-  #+END_VERSE
-  
-  - *Mobile Identity Connect* (MIC) - bridges mobile applications with existing enterprise identity and single sign-on solutions
-  - *Flex* - low-code, lightweight Node.js microservices for adding server-side code
-  - *RAPID* - connect to existing enterprise external data (like relational Database or external REST API)
-* Serverside Code
-  Serverside code is mainly used to create logic that is executed as a *collection hook* (before or after a request to a collection is made) or to a *custom endpiont* - a logic that has its own endpiont to be called and be executed.
+  Services are objects that can be shared between \\
+  Environemnts in an App \\
+  or Apps in an Organization
+  \\
+  \\
+  - *Mobile Identity Connect* (MIC) - add authentication with existing enterprise identity providers and single sign-on solutions
+  - *Flex* - lightweight Node.js microservices for server-side code
+  - *RAPID* - connect to existing enterprise external data - relational db or external REST API
+* Server-side Code
+  Server-side code is mainly used to create logic that is executed as a *collection hook* (before or after a request to a collection is made) or to a *custom endpoint* - a logic that has its own endpiont to be called and be executed.
 [[./images/kinvey_request.png]] 
  
-  - Business Logic - writing server side logic (collection hooks and custom endpints) right inside Kinvey Console. It is preferable to use Flex instead of Business Logic.
-  - Flex - create a Node.js microservice that you can deploy to Kinvey.
-  - Scheduled code - execute custom endpionts on predefined intervals
+  - Business Logic - server-side logic right inside Kinvey Console. Still, Flex is preferred
+  - Flex - Node.js microservice
+  - Scheduled code - execute custom endpoint on set intervals
 * Flex
   Kinvey Flex is a more feature-rich and flexible way to write server-side code for your apps compared to Business Logic. \\
   Flex has three flavors: data integration services, authentication services, and general-purpose functions.
@@ -230,6 +242,7 @@ Authorization: [Basic Auth with app credentials]
    Before you can deploy your Node.js project, you need to provision a Flex service using the Kinvey Console.
    \\
    \\
+   #+ATTR_HTML: :target _blank 
    Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service
 ** Initialize a Node.js project
   #+BEGIN_SRC shell
@@ -290,7 +303,7 @@ Authorization: [Basic Auth with app credentials]
 
 #+ATTR_HTML: :target _blank 
 Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices
-** Check service functions
+** Check deployed service
    #+ATTR_HTML: :style text-align:left
    Go to 
    #+BEGIN_SRC 
