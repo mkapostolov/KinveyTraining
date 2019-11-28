@@ -35,7 +35,7 @@
   [[./images/kid.png]]
 * REST API
   Host: https://jsi-us1-baas.kinvey.com \\
-  All reqeuest require authentication \\
+  All request require authentication \\
  \\ 
   *Basic* Authentication
 #+BEGIN_SRC text
@@ -138,10 +138,10 @@ Authorization: [Basic Auth with app credentials]
   \\ 
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/datastore
-** Relatinal vs. NoSQL database
+** Relational vs. NoSQL database
    #+BEGIN_VERSE
    Kinvey uses MongoDB which is a NoSQL database.
-   A NoSQL databse stores data as key-value pairs. 
+   A NoSQL database stores data as key-value pairs. 
    #+END_VERSE
       
    #+BEGIN_SRC json
@@ -212,8 +212,8 @@ Authorization: [Basic Auth with app credentials]
   2) A request to the received *_downloadURL*
 * Services
   Services are objects that can be shared between \\
-  Environemnts in an App \\
-  or Apps in an Organization
+  Environments in an App \\
+  or Apps in an Organisation
   \\
   \\
   - *Mobile Identity Connect* (MIC) - add authentication with existing enterprise identity providers and single sign-on solutions
@@ -224,7 +224,7 @@ Authorization: [Basic Auth with app credentials]
 [[./images/kinvey_request.png]] 
  
   - Business Logic - server-side logic right inside Kinvey Console. Still, Flex is preferred
-  - Flex - Node.js microservice
+  - Flex - Node.js micro-service
   - Scheduled code - execute custom endpoint on set intervals
 * Flex
   Kinvey Flex is a more feature-rich and flexible way to write server-side code for your apps compared to Business Logic. \\
