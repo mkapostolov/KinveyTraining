@@ -1,11 +1,12 @@
-#+Title: Kinvey BaaS
-#+Author: Martin Apostolov
-
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_INIT_OPTIONS: width:1200, height:800, margin: 0.2, minScale:0.2, maxScale:3.5, hash:true, history:true, controlsTutorial:true
 #+REVEAL_THEME: night
 #+OPTIONS: toc:nil
 #+OPTIONS: num:nil 
+#+REVEAL_EXTRA_CSS: ./custom.css
+
+#+Title: Kinvey BaaS
+#+Author: Martin Apostolov
 
 * Overview of Kinvey product
 ** What is Kinvey
@@ -140,8 +141,8 @@ Authorization: [Basic Auth with app credentials]
   Docs - https://devcenter.kinvey.com/rest/guides/datastore
 ** Relational vs. NoSQL database
    #+BEGIN_VERSE
-   Kinvey uses MongoDB which is a NoSQL database.
-   A NoSQL database stores data as key-value pairs. 
+   Kinvey uses MongoDB - a NoSQL db
+   A NoSQL db stores data as key-value pairs
    #+END_VERSE
       
    #+BEGIN_SRC json
@@ -155,9 +156,9 @@ Authorization: [Basic Auth with app credentials]
    #+END_SRC
    
    #+BEGIN_VERSE
-   NoSQL database has no schema (like relational).
-   NoSQL does not require *Normalized Data*.
-   *Denormalized data* is even preferred.
+   NoSQL db has no schema
+   NoSQL does not require *Normalized Data*
+   *Denormalized data* is even preferred
    #+END_VERSE
   \\ 
   #+ATTR_HTML: :target _blank 
@@ -328,6 +329,10 @@ Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTrou
 POST /rpc/:kid/custom/your-custom-endpoint
 #+END_SRC
 * Security
-  - Collection permissions
-  - Entity permissions
+  #+ATTR_HTML: :height 80%, :width 80%
+  [[./images/permissions.png]]
+  \\
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/security
 * Mobile Identity Connect
+* RAPID
