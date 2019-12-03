@@ -334,5 +334,32 @@ POST /rpc/:kid/custom/your-custom-endpoint
   \\
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/security
+** Permission example
+   A user can be assigned different roles with different collection permissions
+   
+   | Role        | Scenario 1      | Scenario 2        | Scenario 3      |
+   |-------------+-----------------+-------------------+-----------------|
+   | Role 1      | Always          | Grant             | Grant           |
+   | Role 2      | Grant           | Always            | Entity          |
+   | Role 3      | Entity          | Never             |                 |
+   |-------------+-----------------+-------------------+-----------------|
+   |             |                 |                   |                 |
+   | Wins        | *Always*        | *Never*           | *Grant*         |
+   | Explanation | most permissive | Never always wins | most permissive |
+   
+   *Never* always takes precedence over any other access type \\
+   Most *permissive* role wins in all other cases
+
+** Permission example
+| Role        | Create | Read   | Update | Delete |
+|-------------+--------+--------+--------+--------|
+| BillingDept | Always | Always | Always | Always |
+| Intern	    | Never  |        |        | Never  |
+| Customer	  | 	     | Entity |        |        |
+
+\\
+- Alice (BillingDept) - all CRUD operations
+- John (BillingDept & Intern) - can only Read and Update items
+- Bob (Customer) - can only Read the items he has created (or items that have Entity permissions that specifically allow him to view them). He cannot create/modify any items. Not set is an implicit *Never*
 * Mobile Identity Connect
 * RAPID
