@@ -329,6 +329,9 @@ Docs - https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTrou
 #+BEGIN_SRC 
 POST /rpc/:kid/custom/your-custom-endpoint
 #+END_SRC
+** Flex Sample project
+   #+ATTR_HTML: :target _blank 
+   https://github.com/mkapostolov/KinveyFlexSample
 * Security
   #+ATTR_HTML: :height 80%, :width 80%
   [[./images/permissions.png]]
