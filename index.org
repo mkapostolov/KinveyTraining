@@ -176,14 +176,14 @@ Authorization: [Basic Auth with app credentials]
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/data-modeling
 * Files
- *Uploading*\\
- Kinvey stores files in a third-party service - currently Google Cloud Storage \\
- \\
- Uploading is a two-step process:
+  Kinvey stores files in a third-party service \\
+  (Google Cloud Storage) \\
+  \\
+  Uploading is a two-step process:
  1) Upload file metadata to Kinvey
  2) Upload file data to GCS
-\\ 
-\\
+ \\ 
+ \\
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/files
 ** Important notes when uploading
@@ -377,4 +377,22 @@ POST /rpc/:kid/custom/your-custom-endpoint
 - John (BillingDept & Intern) - can only Read and Update items
 - Bob (Customer) - can only Read the items he has created (or items that have Entity permissions that specifically allow him to view them). He cannot create/modify any items. Not set is an implicit *Never*
 * Mobile Identity Connect
+  MIC Architecture \\
+  [[./images/mic-core-architecture.png]]
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/rest/guides/mobile-identity-connect
+** Common MIC Setup
+   https://support.kinvey.com/support/solutions/articles/12000038138-mic-setup-for-common-authentication-sources
 * RAPID
+  With RAPID you can connect external data source with Kinvey Collection
+  
+  #+ATTR_HTML: :target _blank
+  Docs - https://devcenter.kinvey.com/rest/guides/rapid-data
+* SDK
+  JavaScript SDK
+  #+ATTR_HTML: :target _blank 
+  Download - https://devcenter.kinvey.com/html5/downloads
+  #+ATTR_HTML: :target _blank 
+  CDN - https://da189i1jfloii.cloudfront.net/js/kinvey-html5-sdk-4.2.3.min.js
+  #+ATTR_HTML: :target _blank 
+  Docs - https://devcenter.kinvey.com/html5/guides/getting-started 
