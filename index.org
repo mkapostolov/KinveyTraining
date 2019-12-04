@@ -52,10 +52,21 @@ Authorization: Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
   #+BEGIN_SRC 
   Authorization: Kinvey 0a8368d7-cbb8...
   #+END_SRC
+  \\
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/authentication
-  #+ATTR_HTML: :target _blank 
-  https://github.com/mkapostolov/KinveyPostmanRequests
+** Testing the REST API
+   You may use Postman to make requests
+   #+ATTR_HTML: :target _blank 
+   https://www.getpostman.com/
+   \\ 
+   \\
+   Sample Postman requests
+   #+ATTR_HTML: :target _blank 
+   https://github.com/mkapostolov/KinveyPostmanRequests
+   \\ 
+   \\
+   You may also use Kinvey Console \to API Console
 * Users
 Creating a user
  #+BEGIN_SRC

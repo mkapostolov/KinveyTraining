@@ -27,17 +27,17 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Kinvey BaaS</h1><h2 class="author">Martin Apostolov</h2><p class="date">Created: 2019-12-04 Wed 13:12</p>
+<section id="sec-title-slide"><h1 class="title">Kinvey BaaS</h1><h2 class="author">Martin Apostolov</h2><p class="date">Created: 2019-12-04 Wed 14:17</p>
 </section>
 
 <section>
-<section id="slide-orged1c83d">
-<h2 id="orged1c83d">Overview of Kinvey product</h2>
-<div class="outline-text-2" id="text-orged1c83d">
+<section id="slide-orgd310bf5">
+<h2 id="orgd310bf5">Overview of Kinvey product</h2>
+<div class="outline-text-2" id="text-orgd310bf5">
 </div>
 </section>
-<section id="slide-org3dd479c">
-<h3 id="org3dd479c">What is Kinvey</h3>
+<section id="slide-org1c727fc">
+<h3 id="org1c727fc">What is Kinvey</h3>
 <p>
 Kinvey is a serverless development platform. It provides Backend As a Service which means that developers would not require to build and maintain a backend for their apps. 
 </p>
@@ -53,8 +53,8 @@ Key features:
 
 </ul>
 </section>
-<section id="slide-org9eb4eab">
-<h3 id="org9eb4eab">Kinvey Console</h3>
+<section id="slide-org23c312a">
+<h3 id="org23c312a">Kinvey Console</h3>
 <p>
 Kinvey Console is the web-based GUI that allows you to manage most aspects of your Kinvey backend.
 </p>
@@ -63,8 +63,8 @@ Kinvey Console is the web-based GUI that allows you to manage most aspects of yo
 URL: <a href="https://jci-us1-console.kinvey.com" target="_blank">https://jci-us1-console.kinvey.com</a>
 </p>
 </section>
-<section id="slide-org7e787fb">
-<h3 id="org7e787fb">Kinvey DevCenter</h3>
+<section id="slide-org1794810">
+<h3 id="org1794810">Kinvey DevCenter</h3>
 <p>
 Whenever you have questions, you can refer to Kinvey devcenter for detailed documentation of all features.
 </p>
@@ -75,13 +75,13 @@ URL: <a href="https://devcenter.kinvey.com/" target="_blank">https://devcenter.k
 </section>
 </section>
 <section>
-<section id="slide-org17850e8">
-<h2 id="org17850e8">Kinvey Features</h2>
+<section id="slide-orgc1f6842">
+<h2 id="orgc1f6842">Kinvey Features</h2>
 </section>
 </section>
 <section>
-<section id="slide-org665b729">
-<h2 id="org665b729">Apps &amp; Environments</h2>
+<section id="slide-org84a8ff9">
+<h2 id="org84a8ff9">Apps &amp; Environments</h2>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -110,8 +110,8 @@ Each environment has a unique ID called KID (Kinvey ID)
 </section>
 </section>
 <section>
-<section id="slide-orgaccdfbb">
-<h2 id="orgaccdfbb">REST API</h2>
+<section id="slide-org5af65e3">
+<h2 id="org5af65e3">REST API</h2>
 <p>
  Host: <a href="https://jsi-us1-baas.kinvey.com">https://jsi-us1-baas.kinvey.com</a> <br />
  All request require authentication <br />
@@ -135,17 +135,35 @@ Authorization: Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
 <pre  class="example">
 Authorization: Kinvey 0a8368d7-cbb8...
 </pre>
+<p>
+<br />
+</p>
 <p target="_blank">
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/authentication" target="_blank">https://devcenter.kinvey.com/rest/guides/authentication</a>
 </p>
+</section>
+<section id="slide-orgc9e77a4">
+<h3 id="orgc9e77a4">Testing the REST API</h3>
+<p>
+You may use Postman to make requests
+</p>
+<p target="_blank">
+<a href="https://www.getpostman.com/" target="_blank">https://www.getpostman.com/</a>
+<br />
+<br />
+Sample Postman requests
+</p>
 <p target="_blank">
 <a href="https://github.com/mkapostolov/KinveyPostmanRequests" target="_blank">https://github.com/mkapostolov/KinveyPostmanRequests</a>
+<br />
+<br />
+You may also use Kinvey Console &rarr; API Console
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgdf6491d">
-<h2 id="orgdf6491d">Users</h2>
+<section id="slide-org564450c">
+<h2 id="org564450c">Users</h2>
 <p>
 Creating a user
 </p>
@@ -181,8 +199,8 @@ Authorization: [Basic Auth with app credentials]
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/users" target="_blank">https://devcenter.kinvey.com/rest/guides/users</a>
 </p>
 </section>
-<section id="slide-orgbb89e80">
-<h3 id="orgbb89e80">Creating a user in Node.js</h3>
+<section id="slide-orgb97ec14">
+<h3 id="orgb97ec14">Creating a user in Node.js</h3>
 <div class="org-src-container">
 
 <pre  class="src src-js"><code trim><span style="color: #C678DD;">var</span> <span style="color: #E06C75;">request</span> = require<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"request"</span><span style="color: #61AFEF;">)</span>;
@@ -204,8 +222,8 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </div>
 
 </section>
-<section id="slide-orge6fe294">
-<h3 id="orge6fe294">Logging a user in Node.js</h3>
+<section id="slide-org8e1c3e7">
+<h3 id="org8e1c3e7">Logging a user in Node.js</h3>
 <div class="org-src-container">
 
 <pre  class="src src-js"><code trim><span style="color: #C678DD;">var</span> <span style="color: #E06C75;">request</span> = require<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"request"</span><span style="color: #61AFEF;">)</span>;
@@ -226,8 +244,8 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </code></pre>
 </div>
 </section>
-<section id="slide-org5d07fda">
-<h3 id="org5d07fda">Important notes</h3>
+<section id="slide-org0618d5e">
+<h3 id="org0618d5e">Important notes</h3>
 <ol>
 <li>Passing empty body when creating a new user will result in the `username` and `password` being auto-generated.</li>
 <li>By default the issued user session tokens do not expire. You can add expiration through <b>Console</b> &rarr; <b>App settings</b> &rarr; <b>User session timeout</b></li>
@@ -236,8 +254,8 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </section>
 </section>
 <section>
-<section id="slide-org9c1715e">
-<h2 id="org9c1715e">Collections</h2>
+<section id="slide-org53c73f7">
+<h2 id="org53c73f7">Collections</h2>
 <p style="text-align:left">
 Creating a collection
 </p>
@@ -247,8 +265,8 @@ Creating a collection
 
 </ol>
 </section>
-<section id="slide-org474ba94">
-<h3 id="org474ba94">CRUD operations</h3>
+<section id="slide-org0e46e63">
+<h3 id="org0e46e63">CRUD operations</h3>
 <p>
 Kinvey supports CRUD operations (Create, Read, Update, Delete) by making a requests to the following url for collections: 
 </p>
@@ -263,8 +281,8 @@ URL: /appdata/:appKey/:collectionName
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/datastore" target="_blank">https://devcenter.kinvey.com/rest/guides/datastore</a>
 </p>
 </section>
-<section id="slide-orgcaf5bd1">
-<h3 id="orgcaf5bd1">Relational vs. NoSQL database</h3>
+<section id="slide-org7d7d8dd">
+<h3 id="org7d7d8dd">Relational vs. NoSQL database</h3>
 <p class="verse">
 Kinvey uses MongoDB - a NoSQL db<br />
 A NoSQL db stores data as key-value pairs<br />
@@ -296,8 +314,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/data-modeling" target="
 </section>
 </section>
 <section>
-<section id="slide-org954bf67">
-<h2 id="org954bf67">Files</h2>
+<section id="slide-org81031cd">
+<h2 id="org81031cd">Files</h2>
 <p>
 <b>Uploading</b><br />
 Kinvey stores files in a third-party service - currently Google Cloud Storage <br />
@@ -317,8 +335,8 @@ Uploading is a two-step process:
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">https://devcenter.kinvey.com/rest/guides/files</a>
 </p>
 </section>
-<section id="slide-org804d09d">
-<h3 id="org804d09d">Important notes when uploading</h3>
+<section id="slide-org25d2922">
+<h3 id="org25d2922">Important notes when uploading</h3>
 <ol>
 <li>File content type - set "X-Kinvey-Content-Type" header if you want to set the content type to GCS</li>
 <li>Public files - when <b>public: true</b>, in the request's response you will receive <b>_requiredHeaders</b> - include them in the second request</li>
@@ -326,8 +344,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">
 
 </ol>
 </section>
-<section id="slide-orgf90e57f">
-<h3 id="orgf90e57f">Sample request</h3>
+<section id="slide-org07f0db5">
+<h3 id="org07f0db5">Sample request</h3>
 <p>
 <b>Upload file metadata</b>
 </p>
@@ -355,8 +373,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">
       binary file here
 </pre>
 </section>
-<section id="slide-orgdc7dc47">
-<h3 id="orgdc7dc47">Dowloading files</h3>
+<section id="slide-orge888ea0">
+<h3 id="orge888ea0">Dowloading files</h3>
 <p style="text-align:left">
 Downloading from Kinvey is again a two-step process.  
 </p>
@@ -375,8 +393,8 @@ Authorization: [user credentials]
 </section>
 </section>
 <section>
-<section id="slide-orgaa4966e">
-<h2 id="orgaa4966e">Services</h2>
+<section id="slide-orgc9b746b">
+<h2 id="orgc9b746b">Services</h2>
 <p>
 Services are objects that can be shared between <br />
 Environments in an App <br />
@@ -393,8 +411,8 @@ or Apps in an Organisation
 </section>
 </section>
 <section>
-<section id="slide-org04e5dab">
-<h2 id="org04e5dab">Server-side Code</h2>
+<section id="slide-org7483c93">
+<h2 id="org7483c93">Server-side Code</h2>
 <p>
 Server-side code is mainly used to create logic that is executed as a <b>collection hook</b> (before or after a request to a collection is made) or to a <b>custom endpoint</b> - a logic that has its own endpiont to be called and be executed.
 <img src="./images/kinvey_request.png" alt="kinvey_request.png" /> 
@@ -409,8 +427,8 @@ Server-side code is mainly used to create logic that is executed as a <b>collect
 </section>
 </section>
 <section>
-<section id="slide-orgbd255e8">
-<h2 id="orgbd255e8">Flex</h2>
+<section id="slide-org3243288">
+<h2 id="org3243288">Flex</h2>
 <p>
 Kinvey Flex is a more feature-rich and flexible way to write server-side code for your apps compared to Business Logic. <br />
 Flex has three flavors: data integration services, authentication services, and general-purpose functions.
@@ -433,8 +451,8 @@ Prerequisites:
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime</a>
 </p>
 </section>
-<section id="slide-org1bf513a">
-<h3 id="org1bf513a">Create Flex Service in Kinvey Console</h3>
+<section id="slide-orga64bb71">
+<h3 id="orga64bb71">Create Flex Service in Kinvey Console</h3>
 <p>
 Before you can deploy your Node.js project, you need to provision a Flex service using the Kinvey Console.
 <br />
@@ -444,8 +462,8 @@ Before you can deploy your Node.js project, you need to provision a Flex service
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service</a>
 </p>
 </section>
-<section id="slide-org6fbecad">
-<h3 id="org6fbecad">Initialize a Node.js project</h3>
+<section id="slide-org52875d4">
+<h3 id="org52875d4">Initialize a Node.js project</h3>
 <div class="org-src-container">
 
 <pre  class="src src-shell"><code trim>mkdir <span style="color: #98C379;">'myProject'</span>
@@ -456,8 +474,8 @@ touch index.js
 </code></pre>
 </div>
 </section>
-<section id="slide-orge11fe1e">
-<h3 id="orge11fe1e">Initialize the Flex SDK inside index.js</h3>
+<section id="slide-orgd2da14d">
+<h3 id="orgd2da14d">Initialize the Flex SDK inside index.js</h3>
 <div style="font-size: 80%;">
 <div class="org-src-container">
 
@@ -483,8 +501,8 @@ sdk.service<span style="color: #61AFEF;">(</span><span style="color: #98C379;">{
 </code></pre>
 </div>
 </section>
-<section id="slide-org8f85a8e">
-<h3 id="org8f85a8e">Configure Kinvey CLI for deploy</h3>
+<section id="slide-org74166a8">
+<h3 id="org74166a8">Configure Kinvey CLI for deploy</h3>
 <p>
 Configure Kinvey CLI so that it can access Kinvey Console with your credentials
 </p>
@@ -505,8 +523,8 @@ kinvey flex init
 </code></pre>
 </div>
 </section>
-<section id="slide-org1fb4192">
-<h3 id="org1fb4192">Deploy to Kinvey</h3>
+<section id="slide-org483d62e">
+<h3 id="org483d62e">Deploy to Kinvey</h3>
 <div class="org-src-container">
 
 <pre  class="src src-shell"><code trim><span style="color: #56B6C2;">cd</span> &lt;node.js project dir&gt;
@@ -524,8 +542,8 @@ kinvey flex logs
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices</a>
 </p>
 </section>
-<section id="slide-org7ae68c9">
-<h3 id="org7ae68c9">Check deployed service</h3>
+<section id="slide-orga1ea0e9">
+<h3 id="orga1ea0e9">Check deployed service</h3>
 <p style="text-align:left">
 Go to 
 </p>
@@ -559,16 +577,16 @@ Make a request to:
 POST /rpc/:kid/custom/your-custom-endpoint
 </pre>
 </section>
-<section id="slide-org84656c4">
-<h3 id="org84656c4">Flex Sample project</h3>
+<section id="slide-org7632cb1">
+<h3 id="org7632cb1">Flex Sample project</h3>
 <p target="_blank">
 <a href="https://github.com/mkapostolov/KinveyFlexSample" target="_blank">https://github.com/mkapostolov/KinveyFlexSample</a>
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org3b808f0">
-<h2 id="org3b808f0">Security</h2>
+<section id="slide-org5c97292">
+<h2 id="org5c97292">Security</h2>
 <p height="80%," width="80%">
 <img src="./images/permissions.png" alt="permissions.png" height="80%," width="80%" />
 <br />
@@ -577,8 +595,8 @@ POST /rpc/:kid/custom/your-custom-endpoint
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/security" target="_blank">https://devcenter.kinvey.com/rest/guides/security</a>
 </p>
 </section>
-<section id="slide-orga3ecf94">
-<h3 id="orga3ecf94">Permission example</h3>
+<section id="slide-orgccf3764">
+<h3 id="orgccf3764">Permission example</h3>
 <p>
 A user can be assigned different roles with different collection permissions
 </p>
@@ -655,8 +673,8 @@ Most <b>permissive</b> role wins in all other cases
 </p>
 
 </section>
-<section id="slide-org4a64691">
-<h3 id="org4a64691">Permission example</h3>
+<section id="slide-orgc5426a9">
+<h3 id="orgc5426a9">Permission example</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -719,13 +737,13 @@ Most <b>permissive</b> role wins in all other cases
 </section>
 </section>
 <section>
-<section id="slide-org691e921">
-<h2 id="org691e921">Mobile Identity Connect</h2>
+<section id="slide-org7033a95">
+<h2 id="org7033a95">Mobile Identity Connect</h2>
 </section>
 </section>
 <section>
-<section id="slide-org1b535b1">
-<h2 id="org1b535b1">RAPID</h2>
+<section id="slide-org42f3f74">
+<h2 id="org42f3f74">RAPID</h2>
 </section>
 </section>
 </div>
