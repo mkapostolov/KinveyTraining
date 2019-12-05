@@ -175,6 +175,232 @@ Authorization: [Basic Auth with app credentials]
   \\ 
   #+ATTR_HTML: :target _blank 
   Docs - https://devcenter.kinvey.com/rest/guides/data-modeling
+  
+** SQL Tables vs. NoSQL Documents
+#+REVEAL_HTML: <div style="font-size: 60%; text-align: left">
+SQL databases are designed to store related data in tables. 
+
+| Id | Text                                                              | User    | CreatedAt              |
+|----+-------------------------------------------------------------------+---------+------------------------|
+|  0 | It is finally time for graduation! Good job everyone, we made it. | Michael | Aug 03, 2016, 01:08 PM |
+|  1 | The most amazing sunset I have ever seen at Phuket, Thailand      | Seth    | Aug 01, 2016, 01:08 PM |
+
+Every row represents a different post record. The structure of a relational table is fixed - you cannot store fields different from the one that is expected or insert a string where a number is expected.
+
+A NoSQL database does not store data in tables - it stores them in collections. In contrast to a relational database table, a collection does not impose fixed rules what information can be stored in it.
+
+Each content type combines JSON documents containing field-value pairs.
+#+BEGIN_SRC json
+{
+  "Id": 0,
+  "Text": "It is finally time for graduation! Good job everyone, we made it.",
+  "Author": "Michael",
+  "CreatedAt": Aug 03, 2016, 01:08 PM
+},{
+  "Id": 1,
+  "Text": "The most amazing sunset I have ever seen at Phuket, Thailand",
+  "Author": "Seth",
+  "CreatedAt": Aug 01, 2016, 01:08 PM,
+  "PictureUrl": "https://bs3.cdn.amazon.com/v1/1177hpcn4xwrg96b/3c468363-5962-11e6-8a96-9f79bf395ef3"
+}
+#+END_SRC
+
+Notice the additional field `PictureUrl` present in the second record. In NoSQL databases, the design is flexible - in theory, each record can store disparate data. In practice, because data is entered programmatically, most records tend to hold the same type of data.
+** Normalized vs. Embedded Data - 1
+#+REVEAL_HTML: <div style="font-size: 60%; text-align: left">
+Assume you want to add other users' comments to the posts in our imaginary social app. If you were using an SQL database, you would create a new table, give it a name like `Comments`, and then create a one-to-many relationship to the `Posts` table (each post can have multiple comments):
+
+Table `Comments`
+| Id | Text             | PostId | User    |
+|----+------------------+--------+---------|
+|  0 | Congratulations! |      0 | Andy    |
+|  1 | It is beautiful. |      1 | Seth    |
+|  2 | Thanks :)        |      1 | Michael |
+
+Splitting the data into two tables minimizes data redundancy. You are not repeating the post information for every comment - only the reference to it (`postId`). This technique is known as normalization and provides tangible practical benefits. For example, you could update a single post without ever touching the `Comments` table. Because data is normalized, SQL offers a powerful JOIN clause which helps you retrieve combined information from multiple related tables.
+** Normalized vs. Embedded Data - 2
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+In NoSQL, you can also use the normalization technique by splitting related data in different content types and storing a the relation in one of these content types. In the case of our imaginary social app, every post will include an array with all comment IDs.
+
+Content type `Posts`
+#+BEGIN_SRC json
+{
+  "Id": 1,
+  "Text": "The most amazing sunset I have ever seen at Phuket, Thailand",
+  "Author": "Seth",
+  "CreatedAt": Aug 01, 2016, 01:08 PM,
+  "PictureUrl": "https://bs3.cdn.telerik.com/v1/1177hpcn4xwrg96b/3c468363-5962-11e6-8a96-9f79bf395ef3",
+  "CommentIds": [1,2]
+}
+#+END_SRC
+
+Content type `Comment`
+#+BEGIN_SRC json
+{
+  "Id": 1,
+  "Text": "It is beautiful.",
+  "User": "Seth"
+},
+{
+  "Id": 2,
+  "Text": "Thanks :)",
+  "User": "Michael"
+}
+#+END_SRC
+
+** Normalized vs. Embedded Data - 3
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+Of course, as comments start piling up, the array may not be the most practical solution because it can get huge. Instead, each Comment can hold a reference to the post it relates to.
+
+Content type `Activity`
+#+BEGIN_SRC json
+{
+  "Id": 1,
+  "Text": "The most amazing sunset I have ever seen at Phuket, Thailand",
+  "Author": "Seth",
+  "CreatedAt": Aug 01, 2016, 01:08 PM,
+  "PictureUrl": "https://bs3.cdn.amazon.com/v1/1177hpcn4xwrg96b/3c468363-5962-11e6-8a96-9f79bf395ef3",
+}
+#+END_SRC
+
+Content type `Comment`
+#+BEGIN_SRC json
+{
+  "Id": 1,
+  "Text": "It is beautiful.",
+  "PostId": 1,
+  "User": "Seth"
+},
+{
+  "Id": 2,
+  "Text": "Thanks :)",
+  "PostId": 1,
+  "User": "Michael"
+}
+#+END_SRC
+
+There is no wrong or right way - either approach works if it meets your needs and each has its merits. With the first approach, you risk slower data querying because the `CommentIds` array can become very big if your app receives thousands of comments. On the other hand, having this array allows you to very quickly calculate the number of comments to a post and display it. With the second approach, you get faster queries but slower comments data aggregation.
+
+** Normalized vs. Embedded Data - 4
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+So does that mean that using references between content types you can fully mimic SQL in NoSQL? Not quite - here are the major differences:
+- **No JOIN clause** - Remember the powerful SQL JOIN clause? Well *NoSQL has no equivalent of JOIN*. Instead, you save the `Id` field of one document in another as a relation. Then the database should run a second query to return the related data. This mimics the result of a JOIN clause at the expense of multiple roundtrips to the database (decrease in performance).
+- **No transactions** - The definition of a transaction is the propagation of one or more changes to the database. With transactions you ensure that data in related tables is updated all at once - either all changes are applied or none - allowing for data in different tables to stay in sync. NoSQL does not support transactions. So if you want to delete an activity from the Activity content type, you have to delete both the Activity record and the records for Comments referencing this activity. These are two delete operations and if one fails, then you end up with inconsistent data. Therefore, when using relations, an experienced developer should devise a plan to overcome data inconsistency.
+
+** Normalized vs. Embedded Data - 5
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+Based on the above, using normalization in NoSQL is not as practical as in a relational database. A better approach would be to embed the comment's data inside each activity it refers to:
+
+#+BEGIN_SRC json
+{
+  "Id": 1,
+  "Text": "The most amazing sunset I have ever seen at Phuket, Thailand",
+  "Author": "Seth",
+  "CreatedAt": Aug 01, 2016, 01:08 PM,
+  "PictureUrl": "https://bs3.cdn.amazon.com/v1/1177hpcn4xwrg96b/3c468363-5962-11e6-8a96-9f79bf395ef3",
+  "Comment": [{
+      "Text": "It is beautiful.",
+      "ActivityId": 1,
+      "User": "Seth"
+    },
+    {
+      "Text": "Thanks :)",
+      "ActivityId": 1,
+      "User": "Michael"
+    }]
+}
+#+END_SRC
+
+This embedded data approach has the following benefits:
+- Improved performance when querying the database - no multiple trips to the database are necessary to combine the data from different content types.
+- All data is updated at once, decreasing the danger of having data inconsistency.
+
+** Embedded Data Models in NoSQL
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+In embedded documents, such as the one above, the relationships between data are stored in a single document structure. The data is denormalized as information can be repeated. Such data model structure allow applications to retrieve and manipulate related data in a single database operation which decreases the number of queries and updates to complete common operations.
+
+In general, the embedded data model is preferred when you have one-to-one and one-to-many relationships between data entities where "many" is a fairly limited number. In a true one-to-many case where "many" stands for thousands or even millions, it makes more sense even in NoSQL to store the data in separate content types.
+
+In most cases, embedding provides better performance for Read operations by retrieving data in a single database operation. This also solves the problem with data inconsistency as related data is stored in one Content Type, not in different collections.
+
+** Normalized Data Models in NoSQL
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+As mentioned above, a normalized data model makes sense even in NoSQL in some cases. Normalized data is useful when:
+- The data duplication that the embedding results in does not provide sufficient read performance advantages.
+- You want to represent more complex many-to-many relationships. In many-to-many cases, it is generally preferred to use separate content types. Consider Movies and Actors: each movie can feature multiple actors and each actor can star in multiple movies. Even though using embedded data in this case is technically possible, it would require updates to multiple records.
+- You want to model large hierarchical data sets.
+
+In Kinvey, you create relationships by storing only the "*id*" of a document from the related content type instead of the whole document. You then can use that id to make a query to the additional collection and combine the results. 
+** Forum Posts Example - 1
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+Here is a real-life example of a database schema in NoSQL database. Assume we want to create the social app discussed above. It will allow users to create posts and each post will collect comments and likes from other users. How will its database schema look like in Kinvey?
+
+We store all posts as separate documents in a content type. Each document stores the content of the post itself, relations to data in other content types and embeds auxiliary data.
+
+`Posts`
+#+BEGIN_SRC json
+{
+    "Id": "989454cc-0363-4643-8fdb-dc0a4d6da024",
+    "Text": "Once Upon a Time in the West",
+    "Likes": ["7a84a930-6a93-11e6-85cf-3d7d6a0b81e8", "4038ff00-6a94-11e6-a331-13ed018c3f91"],
+    "LatestLikes": [{
+        "UserId": "4038ff00-6a94-11e6-a331-13ed018c3f91",
+        "UserName": "Michael"
+    }, {
+        "UserId": "63fed5b0-6a97-11e6-af7d-0b7cc9815142",
+        "UserName": "Seth"
+    }],
+    "LatestComments": [{
+        "Comment": "Congratulations!",
+        "ActivityId": "171500b8-d6e7-11e5-b3f8-25ad4818bcd4",
+        "UserId": "171500b4-d6e7-11e5-b3f8-25ad4818bcd4",
+        "Id": "18b6c9d0-d6e7-11e5-b3f8-25ad4818bcd4",
+    }, {
+        "Comment": "It is beautiful.",
+        "ActivityId": "171500b9-d6e7-11e5-b3f8-25ad4818bcd4",
+        "UserId": "171500b7-d6e7-11e5-b3f8-25ad4818bcd4",
+        "Id": "18b6c9d2-d6e7-11e5-b3f8-25ad4818bcd4",
+    }],
+    "NumberOfComments": 10
+}
+#+END_SRC
+
+** Forum Posts Example - 2
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+For example, we could pull out the information that `NumberOfComments` provides by running a count query, but embedding it here allows for a much speedier read.
+
+The `Likes` field actually stores relations to our `Users` content type (not portrayed here because of space restraints).
+
+`LatestLikes` holds information about the last users who liked the post. This helps us display the following aggregated information on the main page: "Michael and 3 others like this post". When the viewer clicks to see who else liked the post, we could create a separate request where we expand on the `userId`s who liked this specific post. Reading the data would create multiple internal queries, but because we only read one post, the response from the database would be very quick.
+
+`LatestComments` serves a similar purpose but for comments.
+
+** Forum Posts Example - 3
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+We store comments in a separate content type. Each comment holds a relation (`Id`) to a document in the `Posts` content type. Because a post can receive multiple comments, multiple documents can store the `Id` of a single post.
+
+Content type `Comments`
+#+BEGIN_SRC json
+{
+    "Comment": "Congratulations!",
+    "PostId": "171500b8-d6e7-11e5-b3f8-25ad4818bcd4",
+    "UserId": "171500b4-d6e7-11e5-b3f8-25ad4818bcd4",
+    "CreatedBy": "171500b4-d6e7-11e5-b3f8-25ad4818bcd4",
+    "Owner": "171500b4-d6e7-11e5-b3f8-25ad4818bcd4",
+    "CreatedAt": "2016-02-19T08:59:34.509Z",
+    "ModifiedAt": "2016-02-19T08:59:34.509Z",
+    "ModifiedBy": "00000000-0000-0000-0000-000000000000",
+    "Id": "18b6c9d0-d6e7-11e5-b3f8-25ad4818bcd4"
+}
+#+END_SRC
+
+** Forum Posts Example - 4
+#+REVEAL_HTML: <div style="font-size: 65%; text-align: left">
+You can see that we use a hybrid schema design: some data is normalized and some data is embedded. This allows us to:
+- Optimize the schema for the most frequent use cases:
+	- The main view of the application will list information about the selected post, the latest likes and the total number of likes, the latest comments and the total number of comments. The proposed schema design allows us to load the screen using a query to a single content type.
+	- Links will allow the user to tap to view all likes and all comments. The additional request that we need to make to pull out this information targets a single `postId` which results in optimal performance.
+ - Control the size of the document. There could be hundreds or thousands of comments, which could make a single post document needlessly huge if we chose to embed them.
 * Files
   Kinvey stores files in a third-party service \\
   (Google Cloud Storage) \\
