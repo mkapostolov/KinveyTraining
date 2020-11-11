@@ -21,7 +21,7 @@
    Kinvey Console is the web-based GUI that allows you to manage most aspects of your Kinvey backend.
    
    #+ATTR_HTML: :target _blank 
-   URL: [[https://jci-us1-console.kinvey.com]]
+   URL: [[https://console.kinvey.com]]
 ** Kinvey DevCenter
    Whenever you have questions, you can refer to Kinvey devcenter for detailed documentation of all features.
    
@@ -35,7 +35,7 @@
   Each environment has a unique ID called KID (Kinvey ID)
   [[./images/kid.png]]
 * REST API
-  Host: https://jsi-us1-baas.kinvey.com \\
+  Host: https://baas.kinvey.com \\
   All request require authentication \\
  \\ 
   *Basic* Authentication
@@ -71,7 +71,7 @@ Authorization: Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk
 Creating a user
  #+BEGIN_SRC
  POST /user/:appKey/
- Host: jci-us1-baas.kinvey.com
+ Host: baas.kinvey.com
  Authorization: [Basic Auth with app credentials]
  Content-Type: application/json
 
@@ -85,7 +85,7 @@ Creating a user
  Logging a user
 #+BEGIN_SRC 
 POST /user/:appKey/login
-Host: jci-us1-baas.kinvey.com
+Host: baas.kinvey.com
 Content-Type: application/json
 Authorization: [Basic Auth with app credentials]
 
@@ -103,7 +103,7 @@ Authorization: [Basic Auth with app credentials]
 
      var options = {
        method: "POST",
-       url: "https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS",
+       url: "https://baas.kinvey.com/user/kid_HJdVi4iZS",
        headers: {Authorization: 'Basic a2lkX0hKZFZpN....'},
        body: {username: "ivan", password: "123456", city: "Boston"},
        json: true
@@ -122,7 +122,7 @@ Authorization: [Basic Auth with app credentials]
 
     var options = {
       method: "POST",
-      url: "https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS/login",
+      url: "https://baas.kinvey.com/user/kid_HJdVi4iZS/login",
       headers: {Authorization: 'Basic a2lkX0hKZFZpNGlaU...'},
       body: { username: "ivan", password: "123456" },
       json: true
@@ -520,7 +520,7 @@ You can see that we use a hybrid schema design: some data is normalized and some
     $ kinvey init
     ? E-mail john.doe@kinvey.com
     ? Password ***********
-    ? Instance ID (optional) jci-us1
+    ? Instance ID (optional)
     ? Profile name dev
    #+END_SRC 
   

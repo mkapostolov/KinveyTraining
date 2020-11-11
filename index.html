@@ -27,17 +27,17 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Kinvey BaaS</h1><h2 class="author">Martin Apostolov</h2><p class="date">Created: 2020-11-10 Tue 23:32</p>
+<section id="sec-title-slide"><h1 class="title">Kinvey BaaS</h1><h2 class="author">Martin Apostolov</h2><p class="date">Created: 2020-11-11 Wed 10:54</p>
 </section>
 
 <section>
-<section id="slide-orgd6e8fdd">
-<h2 id="orgd6e8fdd">Overview of Kinvey product</h2>
-<div class="outline-text-2" id="text-orgd6e8fdd">
+<section id="slide-org977132a">
+<h2 id="org977132a">Overview of Kinvey product</h2>
+<div class="outline-text-2" id="text-org977132a">
 </div>
 </section>
-<section id="slide-org37ab930">
-<h3 id="org37ab930">What is Kinvey</h3>
+<section id="slide-org0e657f8">
+<h3 id="org0e657f8">What is Kinvey</h3>
 <p>
 Kinvey is a serverless development platform. It provides Backend As a Service which means that developers would not require to build and maintain a backend for their apps. 
 </p>
@@ -53,18 +53,18 @@ Key features:
 
 </ul>
 </section>
-<section id="slide-org9a75db5">
-<h3 id="org9a75db5">Kinvey Console</h3>
+<section id="slide-org9ea2c7e">
+<h3 id="org9ea2c7e">Kinvey Console</h3>
 <p>
 Kinvey Console is the web-based GUI that allows you to manage most aspects of your Kinvey backend.
 </p>
 
 <p target="_blank">
-URL: <a href="https://jci-us1-console.kinvey.com" target="_blank">https://jci-us1-console.kinvey.com</a>
+URL: <a href="https://console.kinvey.com" target="_blank">https://console.kinvey.com</a>
 </p>
 </section>
-<section id="slide-org89a30d3">
-<h3 id="org89a30d3">Kinvey DevCenter</h3>
+<section id="slide-orgdaa08ac">
+<h3 id="orgdaa08ac">Kinvey DevCenter</h3>
 <p>
 Whenever you have questions, you can refer to Kinvey devcenter for detailed documentation of all features.
 </p>
@@ -75,13 +75,13 @@ URL: <a href="https://devcenter.kinvey.com/" target="_blank">https://devcenter.k
 </section>
 </section>
 <section>
-<section id="slide-org92bf81a">
-<h2 id="org92bf81a">Kinvey Features</h2>
+<section id="slide-org475c11b">
+<h2 id="org475c11b">Kinvey Features</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgb929d39">
-<h2 id="orgb929d39">Apps &amp; Environments</h2>
+<section id="slide-org335cbee">
+<h2 id="org335cbee">Apps &amp; Environments</h2>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -110,10 +110,10 @@ Each environment has a unique ID called KID (Kinvey ID)
 </section>
 </section>
 <section>
-<section id="slide-orged5896e">
-<h2 id="orged5896e">REST API</h2>
+<section id="slide-orgb4ed6b0">
+<h2 id="orgb4ed6b0">REST API</h2>
 <p>
- Host: <a href="https://jsi-us1-baas.kinvey.com">https://jsi-us1-baas.kinvey.com</a> <br />
+ Host: <a href="https://baas.kinvey.com">https://baas.kinvey.com</a> <br />
  All request require authentication <br />
 <br />
  <b>Basic</b> Authentication
@@ -142,8 +142,8 @@ Authorization: Kinvey 0a8368d7-cbb8...
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/authentication" target="_blank">https://devcenter.kinvey.com/rest/guides/authentication</a>
 </p>
 </section>
-<section id="slide-org7ab349a">
-<h3 id="org7ab349a">Testing the REST API</h3>
+<section id="slide-org52bb6c8">
+<h3 id="org52bb6c8">Testing the REST API</h3>
 <p>
 You may use Postman to make requests
 </p>
@@ -162,14 +162,14 @@ You may also use Kinvey Console &rarr; API Console
 </section>
 </section>
 <section>
-<section id="slide-orgfe1f6e6">
-<h2 id="orgfe1f6e6">Users</h2>
+<section id="slide-org0ec9cb4">
+<h2 id="org0ec9cb4">Users</h2>
 <p>
 Creating a user
 </p>
 <pre  class="example">
 POST /user/:appKey/
-Host: jci-us1-baas.kinvey.com
+Host: baas.kinvey.com
 Authorization: [Basic Auth with app credentials]
 Content-Type: application/json
 
@@ -185,7 +185,7 @@ Logging a user
 </p>
 <pre  class="example">
 POST /user/:appKey/login
-Host: jci-us1-baas.kinvey.com
+Host: baas.kinvey.com
 Content-Type: application/json
 Authorization: [Basic Auth with app credentials]
 
@@ -199,15 +199,15 @@ Authorization: [Basic Auth with app credentials]
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/users" target="_blank">https://devcenter.kinvey.com/rest/guides/users</a>
 </p>
 </section>
-<section id="slide-org261e6dd">
-<h3 id="org261e6dd">Creating a user in Node.js</h3>
+<section id="slide-org9b0e7fa">
+<h3 id="org9b0e7fa">Creating a user in Node.js</h3>
 <div class="org-src-container">
 
 <pre  class="src src-js"><code trim><span style="color: #C678DD;">var</span> <span style="color: #E06C75;">request</span> = require<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"request"</span><span style="color: #61AFEF;">)</span>;
 
 <span style="color: #C678DD;">var</span> <span style="color: #E06C75;">options</span> = <span style="color: #61AFEF;">{</span>
   method: <span style="color: #98C379;">"POST"</span>,
-  url: <span style="color: #98C379;">"https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS"</span>,
+  url: <span style="color: #98C379;">"https://baas.kinvey.com/user/kid_HJdVi4iZS"</span>,
   headers: <span style="color: #98C379;">{</span>Authorization: <span style="color: #98C379;">'Basic a2lkX0hKZFZpN....'</span><span style="color: #98C379;">}</span>,
   body: <span style="color: #98C379;">{</span>username: <span style="color: #98C379;">"ivan"</span>, password: <span style="color: #98C379;">"123456"</span>, city: <span style="color: #98C379;">"Boston"</span><span style="color: #98C379;">}</span>,
   json: <span style="color: #56B6C2;">true</span>
@@ -222,15 +222,15 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </div>
 
 </section>
-<section id="slide-orga957396">
-<h3 id="orga957396">Logging a user in Node.js</h3>
+<section id="slide-org1fd39c3">
+<h3 id="org1fd39c3">Logging a user in Node.js</h3>
 <div class="org-src-container">
 
 <pre  class="src src-js"><code trim><span style="color: #C678DD;">var</span> <span style="color: #E06C75;">request</span> = require<span style="color: #61AFEF;">(</span><span style="color: #98C379;">"request"</span><span style="color: #61AFEF;">)</span>;
 
 <span style="color: #C678DD;">var</span> <span style="color: #E06C75;">options</span> = <span style="color: #61AFEF;">{</span>
   method: <span style="color: #98C379;">"POST"</span>,
-  url: <span style="color: #98C379;">"https://jci-us1-baas.kinvey.com/user/kid_HJdVi4iZS/login"</span>,
+  url: <span style="color: #98C379;">"https://baas.kinvey.com/user/kid_HJdVi4iZS/login"</span>,
   headers: <span style="color: #98C379;">{</span>Authorization: <span style="color: #98C379;">'Basic a2lkX0hKZFZpNGlaU...'</span><span style="color: #98C379;">}</span>,
   body: <span style="color: #98C379;">{</span> username: <span style="color: #98C379;">"ivan"</span>, password: <span style="color: #98C379;">"123456"</span> <span style="color: #98C379;">}</span>,
   json: <span style="color: #56B6C2;">true</span>
@@ -244,8 +244,8 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </code></pre>
 </div>
 </section>
-<section id="slide-org9b2d96c">
-<h3 id="org9b2d96c">Important notes</h3>
+<section id="slide-org117f4da">
+<h3 id="org117f4da">Important notes</h3>
 <ol>
 <li>Passing empty body when creating a new user will result in the `username` and `password` being auto-generated.</li>
 <li>By default the issued user session tokens do not expire. You can add expiration through <b>Console</b> &rarr; <b>App settings</b> &rarr; <b>User session timeout</b></li>
@@ -254,8 +254,8 @@ request<span style="color: #61AFEF;">(</span>options, <span style="color: #C678D
 </section>
 </section>
 <section>
-<section id="slide-org4613bfb">
-<h2 id="org4613bfb">Collections</h2>
+<section id="slide-orgb67a9f1">
+<h2 id="orgb67a9f1">Collections</h2>
 <p style="text-align:left">
 Creating a collection
 </p>
@@ -265,8 +265,8 @@ Creating a collection
 
 </ol>
 </section>
-<section id="slide-org8cd8a1b">
-<h3 id="org8cd8a1b">CRUD operations</h3>
+<section id="slide-org60ad834">
+<h3 id="org60ad834">CRUD operations</h3>
 <p>
 Kinvey supports CRUD operations (Create, Read, Update, Delete) by making a requests to the following url for collections: 
 </p>
@@ -281,8 +281,8 @@ URL: /appdata/:appKey/:collectionName
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/datastore" target="_blank">https://devcenter.kinvey.com/rest/guides/datastore</a>
 </p>
 </section>
-<section id="slide-org5556be1">
-<h3 id="org5556be1">Relational vs. NoSQL database</h3>
+<section id="slide-org9496494">
+<h3 id="org9496494">Relational vs. NoSQL database</h3>
 <p class="verse">
 Kinvey uses MongoDB - a NoSQL db<br />
 A NoSQL db stores data as key-value pairs<br />
@@ -313,8 +313,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/data-modeling" target="
 </p>
 
 </section>
-<section id="slide-orgd567684">
-<h3 id="orgd567684">SQL Tables vs. NoSQL Documents</h3>
+<section id="slide-orgc3fe5b1">
+<h3 id="orgc3fe5b1">SQL Tables vs. NoSQL Documents</h3>
 <div style="font-size: 60%; text-align: left">
 <p>
 SQL databases are designed to store related data in tables. 
@@ -389,8 +389,8 @@ Each content type combines JSON documents containing field-value pairs.
 Notice the additional field `PictureUrl` present in the second record. In NoSQL databases, the design is flexible - in theory, each record can store disparate data. In practice, because data is entered programmatically, most records tend to hold the same type of data.
 </p>
 </section>
-<section id="slide-orgd7d04e4">
-<h3 id="orgd7d04e4">Normalized vs. Embedded Data - 1</h3>
+<section id="slide-org6c791bd">
+<h3 id="org6c791bd">Normalized vs. Embedded Data - 1</h3>
 <div style="font-size: 60%; text-align: left">
 <p>
 Assume you want to add other users' comments to the posts in our imaginary social app. If you were using an SQL database, you would create a new table, give it a name like `Comments`, and then create a one-to-many relationship to the `Posts` table (each post can have multiple comments):
@@ -447,8 +447,8 @@ Table `Comments`
 Splitting the data into two tables minimizes data redundancy. You are not repeating the post information for every comment - only the reference to it (`postId`). This technique is known as normalization and provides tangible practical benefits. For example, you could update a single post without ever touching the `Comments` table. Because data is normalized, SQL offers a powerful JOIN clause which helps you retrieve combined information from multiple related tables.
 </p>
 </section>
-<section id="slide-org27bb6e5">
-<h3 id="org27bb6e5">Normalized vs. Embedded Data - 2</h3>
+<section id="slide-orgd78e899">
+<h3 id="orgd78e899">Normalized vs. Embedded Data - 2</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 In NoSQL, you can also use the normalization technique by splitting related data in different content types and storing a the relation in one of these content types. In the case of our imaginary social app, every post will include an array with all comment IDs.
@@ -489,8 +489,8 @@ Content type `Comment`
 </div>
 
 </section>
-<section id="slide-org245b707">
-<h3 id="org245b707">Normalized vs. Embedded Data - 3</h3>
+<section id="slide-org4ce42b6">
+<h3 id="org4ce42b6">Normalized vs. Embedded Data - 3</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 Of course, as comments start piling up, the array may not be the most practical solution because it can get huge. Instead, each Comment can hold a reference to the post it relates to.
@@ -536,8 +536,8 @@ There is no wrong or right way - either approach works if it meets your needs an
 </p>
 
 </section>
-<section id="slide-orga9e1b04">
-<h3 id="orga9e1b04">Normalized vs. Embedded Data - 4</h3>
+<section id="slide-orgb5b5aa0">
+<h3 id="orgb5b5aa0">Normalized vs. Embedded Data - 4</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 So does that mean that using references between content types you can fully mimic SQL in NoSQL? Not quite - here are the major differences:
@@ -549,8 +549,8 @@ So does that mean that using references between content types you can fully mimi
 </ul>
 
 </section>
-<section id="slide-org0d191ec">
-<h3 id="org0d191ec">Normalized vs. Embedded Data - 5</h3>
+<section id="slide-org70a1115">
+<h3 id="org70a1115">Normalized vs. Embedded Data - 5</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 Based on the above, using normalization in NoSQL is not as practical as in a relational database. A better approach would be to embed the comment's data inside each activity it refers to:
@@ -588,8 +588,8 @@ This embedded data approach has the following benefits:
 </ul>
 
 </section>
-<section id="slide-org6326193">
-<h3 id="org6326193">Embedded Data Models in NoSQL</h3>
+<section id="slide-org834d79a">
+<h3 id="org834d79a">Embedded Data Models in NoSQL</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 In embedded documents, such as the one above, the relationships between data are stored in a single document structure. The data is denormalized as information can be repeated. Such data model structure allow applications to retrieve and manipulate related data in a single database operation which decreases the number of queries and updates to complete common operations.
@@ -604,8 +604,8 @@ In most cases, embedding provides better performance for Read operations by retr
 </p>
 
 </section>
-<section id="slide-org779fb56">
-<h3 id="org779fb56">Normalized Data Models in NoSQL</h3>
+<section id="slide-orgaa84220">
+<h3 id="orgaa84220">Normalized Data Models in NoSQL</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 As mentioned above, a normalized data model makes sense even in NoSQL in some cases. Normalized data is useful when:
@@ -621,8 +621,8 @@ As mentioned above, a normalized data model makes sense even in NoSQL in some ca
 In Kinvey, you create relationships by storing only the "<b>id</b>" of a document from the related content type instead of the whole document. You then can use that id to make a query to the additional collection and combine the results. 
 </p>
 </section>
-<section id="slide-org4e558d8">
-<h3 id="org4e558d8">Forum Posts Example - 1</h3>
+<section id="slide-org375b5bf">
+<h3 id="org375b5bf">Forum Posts Example - 1</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 Here is a real-life example of a database schema in NoSQL database. Assume we want to create the social app discussed above. It will allow users to create posts and each post will collect comments and likes from other users. How will its database schema look like in Kinvey?
@@ -665,8 +665,8 @@ We store all posts as separate documents in a content type. Each document stores
 </div>
 
 </section>
-<section id="slide-org3a2fb65">
-<h3 id="org3a2fb65">Forum Posts Example - 2</h3>
+<section id="slide-org7980a1a">
+<h3 id="org7980a1a">Forum Posts Example - 2</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 For example, we could pull out the information that `NumberOfComments` provides by running a count query, but embedding it here allows for a much speedier read.
@@ -685,8 +685,8 @@ The `Likes` field actually stores relations to our `Users` content type (not por
 </p>
 
 </section>
-<section id="slide-orgae6df7b">
-<h3 id="orgae6df7b">Forum Posts Example - 3</h3>
+<section id="slide-org9c7b487">
+<h3 id="org9c7b487">Forum Posts Example - 3</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 We store comments in a separate content type. Each comment holds a relation (`Id`) to a document in the `Posts` content type. Because a post can receive multiple comments, multiple documents can store the `Id` of a single post.
@@ -712,8 +712,8 @@ Content type `Comments`
 </div>
 
 </section>
-<section id="slide-org56fd4d1">
-<h3 id="org56fd4d1">Forum Posts Example - 4</h3>
+<section id="slide-orge12c5f7">
+<h3 id="orge12c5f7">Forum Posts Example - 4</h3>
 <div style="font-size: 65%; text-align: left">
 <p>
 You can see that we use a hybrid schema design: some data is normalized and some data is embedded. This allows us to:
@@ -736,8 +736,8 @@ Optimize the schema for the most frequent use cases:
 </section>
 </section>
 <section>
-<section id="slide-orgd81c09e">
-<h2 id="orgd81c09e">Files</h2>
+<section id="slide-org68e8d7d">
+<h2 id="org68e8d7d">Files</h2>
 <p>
 Kinvey stores files in a third-party service <br />
 (Google Cloud Storage) <br />
@@ -757,8 +757,8 @@ Uploading is a two-step process:
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">https://devcenter.kinvey.com/rest/guides/files</a>
 </p>
 </section>
-<section id="slide-orgcf8dc52">
-<h3 id="orgcf8dc52">Important notes when uploading</h3>
+<section id="slide-orgd4e43a2">
+<h3 id="orgd4e43a2">Important notes when uploading</h3>
 <ol>
 <li>File content type - set "X-Kinvey-Content-Type" header if you want to set the content type to GCS</li>
 <li>Public files - when <b>public: true</b>, in the request's response you will receive <b>_requiredHeaders</b> - include them in the second request</li>
@@ -766,8 +766,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">
 
 </ol>
 </section>
-<section id="slide-orgb13c76c">
-<h3 id="orgb13c76c">Sample request</h3>
+<section id="slide-org15fb990">
+<h3 id="org15fb990">Sample request</h3>
 <p>
 <b>Upload file metadata</b>
 </p>
@@ -795,8 +795,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/files" target="_blank">
       binary file here
 </pre>
 </section>
-<section id="slide-org92e0fdb">
-<h3 id="org92e0fdb">Dowloading files</h3>
+<section id="slide-org66b22c9">
+<h3 id="org66b22c9">Dowloading files</h3>
 <p style="text-align:left">
 Downloading from Kinvey is again a two-step process.  
 </p>
@@ -815,8 +815,8 @@ Authorization: [user credentials]
 </section>
 </section>
 <section>
-<section id="slide-org43993f5">
-<h2 id="org43993f5">Services</h2>
+<section id="slide-orgac6190b">
+<h2 id="orgac6190b">Services</h2>
 <p>
 Services are objects that can be shared between <br />
 Environments in an App <br />
@@ -833,8 +833,8 @@ or Apps in an Organisation
 </section>
 </section>
 <section>
-<section id="slide-org82b6813">
-<h2 id="org82b6813">Server-side Code</h2>
+<section id="slide-org5b81d05">
+<h2 id="org5b81d05">Server-side Code</h2>
 <p>
 Server-side code is mainly used to create logic that is executed as a <b>collection hook</b> (before or after a request to a collection is made) or to a <b>custom endpoint</b> - a logic that has its own endpiont to be called and be executed.
 <img src="./images/kinvey_request.png" alt="kinvey_request.png" /> 
@@ -849,8 +849,8 @@ Server-side code is mainly used to create logic that is executed as a <b>collect
 </section>
 </section>
 <section>
-<section id="slide-org97cc15b">
-<h2 id="org97cc15b">Flex</h2>
+<section id="slide-org8d0e4b4">
+<h2 id="org8d0e4b4">Flex</h2>
 <p>
 Kinvey Flex is a more feature-rich and flexible way to write server-side code for your apps compared to Business Logic. <br />
 Flex has three flavors: data integration services, authentication services, and general-purpose functions.
@@ -873,8 +873,8 @@ Prerequisites:
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime</a>
 </p>
 </section>
-<section id="slide-org2dc94bd">
-<h3 id="org2dc94bd">Create Flex Service in Kinvey Console</h3>
+<section id="slide-org98af669">
+<h3 id="org98af669">Create Flex Service in Kinvey Console</h3>
 <p>
 Before you can deploy your Node.js project, you need to provision a Flex service using the Kinvey Console.
 <br />
@@ -884,8 +884,8 @@ Before you can deploy your Node.js project, you need to provision a Flex service
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime#creating-an-internal-flex-service</a>
 </p>
 </section>
-<section id="slide-orgf5f1997">
-<h3 id="orgf5f1997">Initialize a Node.js project</h3>
+<section id="slide-orgfcda111">
+<h3 id="orgfcda111">Initialize a Node.js project</h3>
 <div class="org-src-container">
 
 <pre  class="src src-shell"><code trim>mkdir <span style="color: #98C379;">'myProject'</span>
@@ -896,8 +896,8 @@ touch index.js
 </code></pre>
 </div>
 </section>
-<section id="slide-org26bae30">
-<h3 id="org26bae30">Initialize the Flex SDK inside index.js</h3>
+<section id="slide-orgb65036a">
+<h3 id="orgb65036a">Initialize the Flex SDK inside index.js</h3>
 <div style="font-size: 80%;">
 <div class="org-src-container">
 
@@ -923,8 +923,8 @@ sdk.service<span style="color: #61AFEF;">(</span><span style="color: #98C379;">{
 </code></pre>
 </div>
 </section>
-<section id="slide-orge812ddd">
-<h3 id="orge812ddd">Configure Kinvey CLI for deploy</h3>
+<section id="slide-org4c7d94f">
+<h3 id="org4c7d94f">Configure Kinvey CLI for deploy</h3>
 <p>
 Configure Kinvey CLI so that it can access Kinvey Console with your credentials
 </p>
@@ -933,7 +933,7 @@ Configure Kinvey CLI so that it can access Kinvey Console with your credentials
 <pre  class="src src-shell"><code trim>$ kinvey init
 ? E-mail john.doe@kinvey.com
 ? Password ***********
-? Instance ID <span style="color: #61AFEF;">(</span>optional<span style="color: #61AFEF;">)</span> jci-us1
+? Instance ID <span style="color: #61AFEF;">(</span>optional<span style="color: #61AFEF;">)</span>
 ? Profile name dev
 </code></pre>
 </div>
@@ -945,8 +945,8 @@ kinvey flex init
 </code></pre>
 </div>
 </section>
-<section id="slide-org62dab78">
-<h3 id="org62dab78">Deploy to Kinvey</h3>
+<section id="slide-orga8c301a">
+<h3 id="orga8c301a">Deploy to Kinvey</h3>
 <div class="org-src-container">
 
 <pre  class="src src-shell"><code trim><span style="color: #56B6C2;">cd</span> &lt;node.js project dir&gt;
@@ -964,8 +964,8 @@ kinvey flex logs
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices" target="_blank">https://devcenter.kinvey.com/rest/guides/flexservice-runtime#ManagingTroubleshootingandTerminatingServices</a>
 </p>
 </section>
-<section id="slide-orga219f5e">
-<h3 id="orga219f5e">Check deployed service</h3>
+<section id="slide-orgda5315a">
+<h3 id="orgda5315a">Check deployed service</h3>
 <p style="text-align:left">
 Go to 
 </p>
@@ -999,16 +999,16 @@ Make a request to:
 POST /rpc/:kid/custom/your-custom-endpoint
 </pre>
 </section>
-<section id="slide-org1e4fd36">
-<h3 id="org1e4fd36">Flex Sample project</h3>
+<section id="slide-orgb8f2526">
+<h3 id="orgb8f2526">Flex Sample project</h3>
 <p target="_blank">
 <a href="https://github.com/mkapostolov/KinveyFlexSample" target="_blank">https://github.com/mkapostolov/KinveyFlexSample</a>
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orga266de1">
-<h2 id="orga266de1">Security</h2>
+<section id="slide-org5f236ca">
+<h2 id="org5f236ca">Security</h2>
 <p height="80%," width="80%">
 <img src="./images/permissions.png" alt="permissions.png" height="80%," width="80%" />
 <br />
@@ -1017,8 +1017,8 @@ POST /rpc/:kid/custom/your-custom-endpoint
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/security" target="_blank">https://devcenter.kinvey.com/rest/guides/security</a>
 </p>
 </section>
-<section id="slide-orgc76f7b7">
-<h3 id="orgc76f7b7">Permission example</h3>
+<section id="slide-orgfe2268e">
+<h3 id="orgfe2268e">Permission example</h3>
 <p>
 A user can be assigned different roles with different collection permissions
 </p>
@@ -1095,8 +1095,8 @@ Most <b>permissive</b> role wins in all other cases
 </p>
 
 </section>
-<section id="slide-org8da9eab">
-<h3 id="org8da9eab">Permission example</h3>
+<section id="slide-orgc062d6c">
+<h3 id="orgc062d6c">Permission example</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1159,8 +1159,8 @@ Most <b>permissive</b> role wins in all other cases
 </section>
 </section>
 <section>
-<section id="slide-orga4a009d">
-<h2 id="orga4a009d">Mobile Identity Connect</h2>
+<section id="slide-orge51389c">
+<h2 id="orge51389c">Mobile Identity Connect</h2>
 <p>
 MIC Architecture <br />
 <img src="./images/mic-core-architecture.png" alt="mic-core-architecture.png" />
@@ -1169,16 +1169,16 @@ MIC Architecture <br />
 Docs - <a href="https://devcenter.kinvey.com/rest/guides/mobile-identity-connect" target="_blank">https://devcenter.kinvey.com/rest/guides/mobile-identity-connect</a>
 </p>
 </section>
-<section id="slide-org995ae2b">
-<h3 id="org995ae2b">Common MIC Setup</h3>
+<section id="slide-orgc354a7b">
+<h3 id="orgc354a7b">Common MIC Setup</h3>
 <p>
 <a href="https://support.kinvey.com/support/solutions/articles/12000038138-mic-setup-for-common-authentication-sources">https://support.kinvey.com/support/solutions/articles/12000038138-mic-setup-for-common-authentication-sources</a>
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgbe76356">
-<h2 id="orgbe76356">RAPID</h2>
+<section id="slide-org398c159">
+<h2 id="org398c159">RAPID</h2>
 <p>
 With RAPID you can connect external data source with Kinvey Collection
 </p>
@@ -1189,8 +1189,8 @@ Docs - <a href="https://devcenter.kinvey.com/rest/guides/rapid-data" target="_bl
 </section>
 </section>
 <section>
-<section id="slide-orgc419ce7">
-<h2 id="orgc419ce7">SDK</h2>
+<section id="slide-orgea1585e">
+<h2 id="orgea1585e">SDK</h2>
 <p>
 JavaScript SDK
 </p>
